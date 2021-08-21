@@ -59,6 +59,10 @@ namespace OneTimePasswordAppAuthentication
                 lblMsg.Text = "Logged in successfully";
                 Response.Redirect("Success.aspx");
             }
+            else
+            {
+                lblMsg.Text = "Error. Token is invalid!";
+            }
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
