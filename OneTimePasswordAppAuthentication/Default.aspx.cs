@@ -9,10 +9,15 @@ namespace OneTimePasswordAppAuthentication
 {
     public partial class _Default : Page
     {
+        DateTime t1;
+        DateTime t2;
         protected void Page_Load(object sender, EventArgs e)
         {
-            TextBoxDateTime.Text = DateTime.Now.ToString();
-
+            TextBoxDateTime.Text = DateTime.Now.ToString("hh:mm");
+            if (!this.IsPostBack)
+            {
+               // TimerTick.Text = DateTime.Now.ToString("hh:mm:ss tt");
+            }
         }
 
         protected void GenerateOTP(object sender, EventArgs e)
@@ -44,6 +49,10 @@ namespace OneTimePasswordAppAuthentication
                 LBl30Seconds.Text = "Token is available for 30 seconds only!";
                 Timer1.Enabled = true;
 
+               
+               TimerTick.Text = DateTime.Now.ToString("hh:mm:ss tt");
+                t1 = DateTime.Now;
+
             }
             else
             {
@@ -54,9 +63,12 @@ namespace OneTimePasswordAppAuthentication
         protected void ValidateOTP_Click(object sender, EventArgs e)
         {
             Timer1.Enabled = false;
-            if (lblOTP.Text == TextBoxValidateToken.Text) // timer seconds 30!!!!!!!!
+            t2 = DateTime.Now;
+            TimeSpan time = t2.Subtract(t1);
+
+            if (lblOTP.Text == TextBoxValidateToken.Text && time.TotalSeconds > 30000) 
             {
-                lblMsg.Text = "Logged in successfully";
+                lblMsg.Text = "Logged in successfully"; 
                 Response.Redirect("Success.aspx");
             }
             else
@@ -67,8 +79,7 @@ namespace OneTimePasswordAppAuthentication
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            //int lbl = Convert.ToInt32(TimerTick.Text);
-           // TimerTick.Text = (lbl + 1).ToString();
+            TimerTick.Text = DateTime.Now.ToString("hh:mm:ss tt");
         }
     }
 }

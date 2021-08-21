@@ -43,14 +43,18 @@
             <asp:Label ID="lblMsg" runat="server"></asp:Label>
             <br />
             <br />
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-            <asp:Label ID="TimerTick" runat="server" Interval="1000"></asp:Label>
-            <br />
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <asp:Label ID="TimerTick" runat="server" />
+            <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick" Interval="1000" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 
         </div>
-        <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick">
-        </asp:Timer>
+       
     </form>
 </body>
 </html>
