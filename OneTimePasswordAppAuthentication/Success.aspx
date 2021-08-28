@@ -10,6 +10,10 @@
     <form id="form1" runat="server">
         <div>
             Login succesfully!!!!! Token Works
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back to Main Page" />
+            <br />
         </div>
     </form>
 </body>
