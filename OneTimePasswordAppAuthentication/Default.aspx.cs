@@ -67,10 +67,14 @@ namespace OneTimePasswordAppAuthentication
             TimeSpan time = t2.Subtract(t1);
             var seconds = time.TotalSeconds;
 
-            if (lblOTP.Text == TextBoxValidateToken.Text && seconds > 30000) 
+            if (lblOTP.Text == TextBoxValidateToken.Text && seconds > 30000)
             {
-                lblMsg.Text = "Logged in successfully"; 
-                Response.Redirect("Success.aspx");
+                lblMsg.Text = "Logged in successfully";
+
+                string url;
+                url = "Success.aspx?name=" +
+                    TextBoxUserId.Text; 
+                Response.Redirect(url);         
             }
             else
             {
